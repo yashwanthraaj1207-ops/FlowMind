@@ -1,245 +1,106 @@
-# 🧠 FlowMind
-
-## AI-Powered Productivity Intelligence
-
-FlowMind is a context-aware productivity intelligence system designed to help students and professionals reduce hidden productivity leaks caused by unnecessary app switching, interruptions, repetitive workflows, idle time, and distracting applications.
-
-Unlike traditional screen-time trackers that only report how long a user spends on an application, FlowMind focuses on understanding the user's current intent and workflow context.
-
-It follows an intelligent pipeline:
-
-> Observe → Understand → Detect → Intervene → Recommend → Automate → Measure
+# FlowMind — Productivity Intelligence System
+> **iQOO Hackathon 2026 — Productivity Track**
+> An AI-driven contextual productivity intelligence system designed on the core principle:
+> *"The same application can be productive or distracting depending on the user's current intention and workflow context."*
 
 ---
 
-# 🎯 Problem
+## 🚀 Key Features & Pipeline
 
-Modern users lose significant productive time through:
+FlowMind operates across the 6-stage intelligence pipeline:
+$$\textbf{Observe} \longrightarrow \textbf{Understand} \longrightarrow \textbf{Detect} \longrightarrow \textbf{Intervene} \longrightarrow \textbf{Recommend} \longrightarrow \textbf{Measure}$$
 
-- Unnecessary application switching
-- Digital distractions
-- Repeated interruptions
-- Context switching
-- Unproductive browsing
-- Repetitive workflows
-- Poor focus-session management
-- Lack of awareness about productivity patterns
-
-Traditional productivity applications mainly provide timers, task lists, or screen-time statistics.
-
-They tell users WHAT happened.
-
-FlowMind aims to understand WHY it happened and WHAT action can help.
-
----
-
-# 💡 Solution
-
-FlowMind introduces a context-aware productivity layer that understands the user's current objective through configurable Flow Modes.
-
-Examples:
-
-- 📚 Study
-- 💼 Work
-- 🎮 Entertainment
-- 👤 Personal
-- ⚙️ Custom
-
-The same application may be productive in one context and distracting in another.
-
-For example:
-
-A browser can be productive during Study Mode when researching a topic, but the same browser can become a productivity leak when the user repeatedly switches to unrelated content.
-
-Therefore, FlowMind does not permanently classify applications as "good" or "bad."
-
-It evaluates activity according to the user's current context.
+1. **Dual Telemetry Observation (Observe)**:
+   - **Real Desktop Telemetry**: Electron desktop shell observes active foreground OS windows (`VS Code`, `Google Chrome`, `Terminal`, `Spotify`, `Discord`, etc.) and real context switch transitions.
+   - **Demo Simulation Telemetry**: Deterministic scenario engine (Scenarios A, B, C, D) for guaranteed, reproducible demonstrations.
+2. **Context-Aware Productivity Leak Engine (Understand & Detect)**:
+   - Evaluates activities against current Flow Mode and user intentions.
+   - Evidence-weighted **Detection Confidence** calculation (not hardcoded).
+   - Zero distraction penalty for entertainment applications in Entertainment Mode.
+3. **Context-Aware Focus Barrier (Intervene)**:
+   - Non-blocking 3–5 minute countdown barrier with 10× prototype acceleration, user override (*"Continue Anyway"*), and 60-second anti-spam cooldown.
+4. **Intelligent Recommendations Layer (Recommend)**:
+   - Explainable coaching breakdowns (*What happened / Why it matters / Suggested next step / Evidence breakdown*).
+5. **Flow Analytics & Impact Engine (Measure)**:
+   - Dynamic **Workflow Efficiency Score (0–100)**, **Focus Consistency (0–100%)**, Time Distribution, and Before/After Impact metrics computed from actual telemetry.
+6. **Privacy-First On-Device Architecture**:
+   - 100% Local processing. Zero page content or keystrokes captured. Zero external API calls or AI cloud keys required.
 
 ---
 
-# 🚀 Key Features
+## 📦 Installation & Setup
 
-## 1. Adaptive Flow Modes
+### Prerequisites
+- Node.js 18+ / npm
+- Windows 10/11 (for native Win32 P/Invoke foreground window tracking in Electron)
 
-Users can select the context in which they are currently working.
+### Step 1: Install Dependencies
+```bash
+npm install
+```
 
-Examples:
+### Step 2: Run Development Desktop Application (Electron + Vite)
+```bash
+npm run electron:dev
+```
+*This starts the Vite dev server and opens the FlowMind Electron desktop application.*
 
-- Study Mode
-- Work Mode
-- Entertainment Mode
-- Personal Mode
-- Custom Mode
-
-This allows FlowMind to interpret user activity according to intent.
-
----
-
-## 2. Focus Sessions
-
-Users can start a focused productivity session.
-
-The system tracks the active session and provides a focused environment for completing the selected objective.
-
-Example:
-
-Study Mode
-↓
-Start Focus Session
-↓
-Focused activity
-↓
-Session tracking
-↓
-Productivity measurement
+### Alternative: Run as Browser Web App (Localhost)
+```bash
+npm run dev
+```
+*Access at:* `http://localhost:5173`
 
 ---
 
-## 3. Productivity Leak Detection
+## 🧪 Testing & Verification
 
-FlowMind identifies patterns that may indicate productivity loss.
+Run the automated test suites validating all intelligence engines:
+```bash
+npm test
+```
+*Executes 33 tests across:*
+1. `ProductivityLeakEngine` Validation
+2. `FocusBarrierService` Validation
+3. `RecommendationEngine` Validation
+4. `AnalyticsEngine` Validation
 
-Examples include:
-
-- Frequent application switching
-- Repeated interruptions
-- Extended unrelated activity
-- Excessive context switching
-- Distracting application usage
-- Repetitive workflows
-
-The objective is not simply to count screen time.
-
-The objective is to identify meaningful productivity leaks.
-
----
-
-## 4. Context-Aware Distraction Detection
-
-An application is not automatically treated as distracting.
-
-FlowMind considers:
-
-> Current Flow Mode + Activity Context + Usage Pattern
-
-This makes the system more adaptive than a simple application blacklist.
+Build production bundle:
+```bash
+npm run build
+```
 
 ---
 
-## 5. Smart Focus Intervention
+## 🎯 Hackathon Demonstration Procedures
 
-When a potential distraction is detected, FlowMind can provide a contextual intervention.
+### Demo Scenario 1: Real Desktop Telemetry (Electron)
+1. Launch via `npm run electron:dev`.
+2. Select **Study Mode** and set goal: `Complete Java Assignment`.
+3. Click **Start Focus Session**.
+4. In the telemetry panel, select **REAL DESKTOP**. Status will display: `● DESKTOP TELEMETRY ACTIVE`.
+5. Alt-Tab / switch between **VS Code**, **Google Chrome** (viewing Java docs), **WhatsApp**, and **Instagram**.
+6. Observe real-time desktop window transitions, switch count increments, focus duration tracking, and dynamic leak alerts.
+7. Click **Pause Session** $\to$ Desktop observation stops immediately (`○ DESKTOP TELEMETRY OFF`).
 
-For example:
+### Demo Scenario 2: Guaranteed Demo Simulation Mode
+1. On the Session page, toggle to **DEMO SIMULATION**.
+2. Select **Scenario B (Study With Productivity Leak)** at `2×` or `4×` speed.
+3. Click **Start Simulation**.
+4. Watch the deterministic pipeline:
+   - `VS Code` $\to$ `Chrome` $\to$ `Java Docs` (*Goal Relevant*)
+   - `WhatsApp` (*Context Interruption*)
+   - `Instagram Reels` (*Potential Leak with 80% Detection Confidence*)
+   - Triggers Focus Barrier $\to$ surfaces *"Return to Complete Java Assignment"* recommendation $\to$ updates real-time analytics.
 
-> Potential Productivity Leak Detected
-
-The user can be given a short focus barrier such as a:
-
-> 3–5 minute intervention
-
-The purpose is to interrupt impulsive switching without permanently blocking legitimate applications.
-
----
-
-## 6. AI-Powered Recommendations
-
-FlowMind can analyze productivity patterns and provide recommendations.
-
-Examples:
-
-- Reduce unnecessary application switching
-- Increase focused work intervals
-- Reduce interruption frequency
-- Identify frequently repeated workflows
-- Improve session planning
-- Suggest more efficient work patterns
+### Demo Scenario 3: Contextual Relativity (Guilt-Free Entertainment)
+1. Switch to **Entertainment Mode**.
+2. Run Scenario C (Entertainment Flow) or open YouTube/Instagram on your desktop.
+3. Notice that YouTube and Instagram receive **zero distraction penalty** and are classified as *Contextually Appropriate* ($100/100$ efficiency).
 
 ---
 
-## 7. Workflow Intelligence
-
-FlowMind can identify repetitive workflow patterns.
-
-Repeated sequences of actions can indicate opportunities for automation.
-
-Example:
-
-Repeated workflow:
-
-Open application
-↓
-Copy information
-↓
-Switch application
-↓
-Paste information
-↓
-Repeat
-
-FlowMind can identify this pattern as a potential automation opportunity.
-
----
-
-## 8. Productivity Analytics
-
-The dashboard provides measurable productivity insights.
-
-Potential metrics include:
-
-- Productivity Score
-- Focus Time
-- Time Saved
-- Interruptions
-- Context Switching
-- Distraction Events
-- Focus Sessions
-- Workflow Efficiency
-
-These metrics help users understand whether their productivity is actually improving.
-
----
-
-# 🧠 Core Intelligence Pipeline
-
-FlowMind follows a seven-stage intelligence pipeline:
-
-```text
-┌───────────────┐
-│    OBSERVE    │
-│ Activity data │
-└───────┬───────┘
-        ↓
-┌───────────────┐
-│   UNDERSTAND  │
-│ User context  │
-└───────┬───────┘
-        ↓
-┌───────────────┐
-│    DETECT     │
-│ Productivity  │
-│     leaks     │
-└───────┬───────┘
-        ↓
-┌───────────────┐
-│   INTERVENE   │
-│ Smart focus   │
-│   barrier     │
-└───────┬───────┘
-        ↓
-┌───────────────┐
-│  RECOMMEND    │
-│ AI insights   │
-└───────┬───────┘
-        ↓
-┌───────────────┐
-│   AUTOMATE    │
-│ Repetitive    │
-│ workflows     │
-└───────┬───────┘
-        ↓
-┌───────────────┐
-│    MEASURE    │
-│ Productivity  │
-│   outcomes    │
-└───────────────┘
+## 🔒 Known OS Notes & Privacy Assurances
+- **Privacy Assurance**: Telemetry collection is restricted strictly to active window process names and window titles. FlowMind never captures keystrokes, form inputs, passwords, or document contents.
+- **Session-Bound Observation**: Desktop window observation runs exclusively while a user's focus session is in the `running` state. Observation terminates automatically on `pause`, `end`, or `reset`.
+- **Operating System Compatibility**: Native foreground window tracking utilizes Windows Win32 P/Invoke APIs via PowerShell background child process. On macOS/Linux, browser simulation mode operates as the cross-platform demonstration environment.
